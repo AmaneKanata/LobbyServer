@@ -6,10 +6,8 @@ const fs = require("fs");
 
 const kubeAddress = "https://agones-dns-8r8rb6bk.hcp.koreacentral.azmk8s.io";
 //const token = "wck52cmcm2sn7iqed9cv2irxdql3bzusbahzbwpeg1nqiwhb9tingqva0egm53ojd2jxrs8o14rjcxaeii0od7w16kd0qvvr8gyo0tw6zs09sat80356n9zdsxzotcr9";
-const token = fs.readFileSync(
-  "/var/run/secrets/kubernetes.io/serviceaccount/token",
-  "utf8"
-);
+const token = fs.readFileSync("/var/run/secrets/kubernetes.io/serviceaccount/token", "utf8");
+const ca = fs.readFileSync("/var/run/secrets/kubernetes.io/serviceaccount/ca.crt");
 const namespace = "default";
 
 const config = {
@@ -17,6 +15,7 @@ const config = {
     "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json",
   },
+  ca : ca,
   // httpsAgent: new (require('https').Agent)({
   //   rejectUnauthorized: false
   // })
