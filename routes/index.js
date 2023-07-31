@@ -15,10 +15,9 @@ const config = {
     "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json",
   },
-  ca : ca,
-  // httpsAgent: new (require('https').Agent)({
-  //   rejectUnauthorized: false
-  // })
+  httpsAgent: new (require('https').Agent)({
+    ca: ca
+  })
 };
 
 const gameServerAllocationAddress = `${kubeAddress}/apis/allocation.agones.dev/v1/namespaces/${namespace}/gameserverallocations`
