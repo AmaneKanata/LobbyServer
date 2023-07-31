@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lobby
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lobby
+  template:
+    metadata:
+      labels:
+        app: lobby
+    spec:
+      serviceAccountName: game-server-allocator
+      nodeSelector:
+        agentpool: workers
+      containers:
+      - name: lobby
+        image: arzmetaacr.azurecr.io/agones_lobby:<version>
+        ports:
+        - containerPort: 3000

@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: simple-game-server
-        image: arzmetaacr.azurecr.io/gameserver_test:agones_v0.11
+        image: arzmetaacr.azurecr.io/gameserver_test:agones_v0.<version>
         imagePullPolicy: Always
       nodeSelector:
         agentpool: workers
