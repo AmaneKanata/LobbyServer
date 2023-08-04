@@ -33,5 +33,12 @@ spec:
           containers:
           - name: simple-game-server
             image: arzmetaacr.azurecr.io/gameserver_test:agones_v0.<version>
+            volumeMounts:
+            - name: coredump
+              mountPath: /mnt/coredump
+          volumes:
+          - name: coredump
+            persistentVolumeClaim:
+              claimName: core-dump-pvc
           nodeSelector:
             agentpool: workers

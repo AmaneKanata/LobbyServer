@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: core-dump-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: core-dump-storage
+  resources:
+    requests:
+      storage: 10Gi
