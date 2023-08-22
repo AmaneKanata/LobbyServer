@@ -1,7 +1,7 @@
 apiVersion: "agones.dev/v1"
 kind: Fleet
 metadata:
-  name: fleet-example
+  name: fleet
 spec:
   replicas: 0
   scheduling: Packed
@@ -15,12 +15,12 @@ spec:
       ports:
         - name: default
           portPolicy: Dynamic
-          container: simple-game-server
+          container: game-server
           containerPort: 7777
           protocol: TCP
         - name: HTTP
           portPolicy: Dynamic
-          container: simple-game-server
+          container: game-server
           containerPort: 7778
           protocol: TCP
       health:
@@ -31,7 +31,7 @@ spec:
       template:
         spec:
           containers:
-          - name: simple-game-server
+          - name: game-server
             image: arzmetaacr.azurecr.io/gameserver_test:agones_v0.<version>
             volumeMounts:
             - name: coredump
