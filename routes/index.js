@@ -49,11 +49,11 @@ router.get('/Room/:mode', function(req, res, next) {
   axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
 
   .then((response) => {
-    console.log('Resource created:', response);
+    //console.log('Resource created:', response);
     res.send(response.data);
   })
   .catch((error) => {
-    console.error('Error creating resource:', error);
+    //console.error('Error creating resource:', error);
     res.send(error);
   });
 });
