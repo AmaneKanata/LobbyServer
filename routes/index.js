@@ -29,6 +29,7 @@ const gameServerAllocationBody =
   "spec": {
     "selectors": [
       {
+        "matchLabels": {},
         "gameServerState" : "Allocated"
       },
       {
@@ -39,12 +40,12 @@ const gameServerAllocationBody =
     "metadata": {
       "labels" : {}
     }
-  },
+  }
 }
 
 router.get('/Room/:mode', function(req, res, next) {
 
-  gameServerAllocationBody.spec.metadata.labels.mode = req.params.mode;
+  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
 
   axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
 
