@@ -43,7 +43,9 @@ const gameServerAllocationBody =
   }
 }
 
-router.get('/', function(req, res, next) {
+router.get('/Room/:type', function(req, res, next) {
+
+  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["type"] = req.params.type
 
   axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
 
