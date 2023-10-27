@@ -51,14 +51,19 @@ function MakeGameServerAllocationBody(mode)
 }
 
 router.get('/Room/:mode', function(req, res, next) {
-  axios.post(gameServerAllocationAddress, MakeGameServerAllocationBody(req.params.mode), config)
+  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
+  gameServerAllocationBody["spec"]["metadata"]["labels"]["MODE"] = req.params.mode;
+
+  console.log("gameServerAllocationBody: ", gameServerAllocationBody);
+
+  axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
 
   .then((response) => {
     //console.log('Resource created:', response);
     res.send(response.data);
   })
   .catch((error) => {
-    //console.error('Error creating resource:', error);
+    console.error('Error creating resource:', error);
     res.send(error);
   });
 });
