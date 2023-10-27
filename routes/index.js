@@ -29,7 +29,6 @@ const gameServerAllocationBody =
   "spec": {
     "selectors": [
       {
-        "matchLabels": {},
         "gameServerState" : "Allocated"
       },
       {
@@ -43,11 +42,16 @@ const gameServerAllocationBody =
   }
 }
 
+function MakeGameServerAllocationBody(mode)
+{
+  const ret = {...gameServerAllocationBody};
+  ret["spec"]["selectors"][0]["matchLabels"]["MODE"] = mode;
+  ret["spec"]["selectors"][1]["matchLabels"]["MODE"] = mode;
+  return ret;
+}
+
 router.get('/Room/:mode', function(req, res, next) {
-
-  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
-
-  axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
+  axios.post(gameServerAllocationAddress, MakeGameServerAllocationBody(req.params.mode), config)
 
   .then((response) => {
     //console.log('Resource created:', response);
