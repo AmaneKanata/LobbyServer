@@ -60,7 +60,7 @@ router.get('/Room/:mode', function(req, res, next) {
   };
   gameServerAllocationBody["spec"]["metadata"]["labels"]["MODE"] = req.params.mode;
 
-  console.log("gameServerAllocationBody: ", gameServerAllocationBody);
+  console.dir("gameServerAllocationBody: ", gameServerAllocationBody);
 
   axios.post(gameServerAllocationAddress, gameServerAllocationBody, config)
 
