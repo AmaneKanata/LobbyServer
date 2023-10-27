@@ -51,7 +51,13 @@ function MakeGameServerAllocationBody(mode)
 }
 
 router.get('/Room/:mode', function(req, res, next) {
-  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
+
+  console.log("Get Room : ", req.params.mode);
+
+  //gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
+  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"] = {
+    "MODE": req.params.mode
+  };
   gameServerAllocationBody["spec"]["metadata"]["labels"]["MODE"] = req.params.mode;
 
   console.log("gameServerAllocationBody: ", gameServerAllocationBody);
