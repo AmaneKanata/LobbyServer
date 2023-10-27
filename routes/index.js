@@ -46,7 +46,7 @@ function MakeGameServerAllocationBody(mode)
 {
   const ret = {...gameServerAllocationBody};
   ret["spec"]["selectors"][0]["matchLabels"]["MODE"] = mode;
-  ret["spec"]["selectors"][1]["matchLabels"]["MODE"] = mode;
+  ret["spec"]["metadata"]["labels"]["MODE"] = mode;
   return ret;
 }
 
