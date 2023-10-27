@@ -29,10 +29,24 @@ spec:
         periodSeconds: 5
         failureThreshold: 3
       template:
+        metadata:
+          matchLabels:
+            mode : <mode>
         spec:
           containers:
           - name: game-server
             image: arzmetaacr.azurecr.io/gameserver_test:agones_v0.<version>
+            env:
+            - name: CLOSE_ON_EMPTY
+              value: '1'
+            - name: CLOSE_ON_IDLE
+              value: '1'
+            - name: DELAY_SEND
+              value: '0'
+            - name: DELAY_SEND_INTERVAL
+              value: '200'
+            - name: MODE
+              value: <mode>
             volumeMounts:
             - name: coredump
               mountPath: /mnt/coredump
