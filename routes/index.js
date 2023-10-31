@@ -27,9 +27,11 @@ const gameServerAllocationBody =
   "apiVersion": "allocation.agones.dev/v1",
   "kind": "GameServerAllocation",
   "spec": {
-    "selectors": [
+    "selectors": 
+    [
       {
-        "gameServerState" : "Allocated"
+        "gameServerState" : "Allocated",
+        "matchLabels" : {}
       },
       {
         "gameServerState" : "Ready"
@@ -55,10 +57,14 @@ router.get('/Room/:mode', function(req, res, next) {
   console.log("Get Room : ", req.params.mode);
 
   //gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"]["MODE"] = req.params.mode;
-  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"] = {
+  gameServerAllocationBody["spec"]["selectors"][0]["matchLabels"] = 
+  {
     "MODE": req.params.mode
   };
-  gameServerAllocationBody["spec"]["metadata"]["labels"]["MODE"] = req.params.mode;
+  gameServerAllocationBody["spec"]["metadata"]["labels"] = 
+  {
+    "MODE": req.params.mode
+  };
 
   console.log("gameServerAllocationBody: ");
   console.dir(gameServerAllocationBody);
